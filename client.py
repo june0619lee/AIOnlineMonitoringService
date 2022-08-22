@@ -1,9 +1,31 @@
+from turtle import width
 import grpc
 import proto_sample_pb2, proto_sample_pb2_grpc
 
 import os
 import cv2 # webcam control; image processing
 import argparse
+
+def pass_to_server(ip, port, frame):
+    if ip[-1] != ':':
+        ip += ':'
+    
+    print('request to server({})'.format(ip+port))
+
+    with grpc.insecure_channel(ip+port) as channel:
+        stub = proto_sample_pb2_grpc.VirtualLearningMonitorStub(channel)
+
+        result = stub.process(
+            proto_sample_pb2.UserData(
+                img_bytes = bytes(frame),
+                width = frame.shape[1],
+                height = frame.shape[0],
+                channel = frame.shape[2]
+            )
+        )
+        
+    return result
+
 
 def opt():
     parser = argparse.ArgumentParser()
@@ -26,6 +48,12 @@ def main():
 
         # print(type(frame)) # np.ndarray
         # print(frame.shape)
+
+        result = pass_to_server(args.ip, args.port, frame)
+
+        print('distance : ', result.distance)
+        print('face yaw:', result.face_yaw)
+        print('eye yaw:', result.eye_yaw)
 
         cv2.imshow('window', frame)
         key = cv2.waitKey(33) # 33 milliseconds / frame
