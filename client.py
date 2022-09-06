@@ -71,7 +71,7 @@ def pass_to_server(ip, port, frame):
 def opt():
     parser = argparse.ArgumentParser()
     parser.add_argument('--ip', type=str, default='localhost:', help='server ip address. (default:localhost:)')
-    parser.add_argument('--port', type=str, default='16011', help='server port. (defult:16011)')
+    parser.add_argument('--port', type=str, default='16011', help='server port. (defult:15011)')
 
     return parser.parse_args()
 

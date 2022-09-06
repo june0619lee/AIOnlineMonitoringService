@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+
 service AI_OnlineMonitoringService{
     rpc process(UserRequest) returns(UserResponse) {}
 }
@@ -15,4 +16,5 @@ message UserResponse {
     int32 distance=1;
     float face_yaw=2;
     float eye_yaw=3;
+
 }

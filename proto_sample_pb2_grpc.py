@@ -5,8 +5,9 @@ import grpc
 import proto_sample_pb2 as proto__sample__pb2
 
 
-class AI_OnlineMonitoringServiceStub(object):
-    """Missing associated documentation comment in .proto file."""
+class VirtualLearningMonitorStub(object):
+    """online class monitoring system
+    """
 
     def __init__(self, channel):
         """Constructor.
@@ -15,14 +16,15 @@ class AI_OnlineMonitoringServiceStub(object):
             channel: A grpc.Channel.
         """
         self.process = channel.unary_unary(
-                '/AI_OnlineMonitoringService/process',
-                request_serializer=proto__sample__pb2.UserRequest.SerializeToString,
-                response_deserializer=proto__sample__pb2.UserResponse.FromString,
+                '/VirtualLearningMonitor/process',
+                request_serializer=proto__sample__pb2.UserData.SerializeToString,
+                response_deserializer=proto__sample__pb2.ReturnData.FromString,
                 )
 
 
-class AI_OnlineMonitoringServiceServicer(object):
-    """Missing associated documentation comment in .proto file."""
+class VirtualLearningMonitorServicer(object):
+    """online class monitoring system
+    """
 
     def process(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -31,22 +33,27 @@ class AI_OnlineMonitoringServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_AI_OnlineMonitoringServiceServicer_to_server(servicer, server):
+
+def add_VirtualLearningMonitorServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'process': grpc.unary_unary_rpc_method_handler(
                     servicer.process,
-                    request_deserializer=proto__sample__pb2.UserRequest.FromString,
-                    response_serializer=proto__sample__pb2.UserResponse.SerializeToString,
+                    request_deserializer=proto__sample__pb2.UserData.FromString,
+                    response_serializer=proto__sample__pb2.ReturnData.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'AI_OnlineMonitoringService', rpc_method_handlers)
+            'VirtualLearningMonitor', rpc_method_handlers)
+
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class AI_OnlineMonitoringService(object):
-    """Missing associated documentation comment in .proto file."""
+
+class VirtualLearningMonitor(object):
+    """online class monitoring system
+    """
+
 
     @staticmethod
     def process(request,
@@ -59,8 +66,10 @@ class AI_OnlineMonitoringService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AI_OnlineMonitoringService/process',
-            proto__sample__pb2.UserRequest.SerializeToString,
-            proto__sample__pb2.UserResponse.FromString,
+
+        return grpc.experimental.unary_unary(request, target, '/VirtualLearningMonitor/process',
+            proto__sample__pb2.UserData.SerializeToString,
+            proto__sample__pb2.ReturnData.FromString,
+
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
