@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+service AI_OnlineMonitoringService{
+    rpc process(UserRequest) returns(UserResponse) {}
+}
+
+message UserRequest {
+    bytes img_bytes=1;
+    int32 width=2;
+    int32 height=3;
+    int32 channel=4;
+}
+
+message UserResponse {
+    int32 distance=1;
+    float face_yaw=2;
+    float eye_yaw=3;
+}
