@@ -1,20 +1,20 @@
 syntax = "proto3";
 
-// online class monitoring system
-service VirtualLearningMonitor {
-    rpc process(UserData) returns (ReturnData) {}
+
+service AI_OnlineMonitoringService{
+    rpc process(UserRequest) returns(UserResponse) {}
 }
 
-// request: client -> server
-message UserData {
-    bytes img_bytes = 1;
-    int32 width = 2;
-    int32 height = 3;
-    int32 channel = 4;
+message UserRequest {
+    bytes img_bytes=1;
+    int32 width=2;
+    int32 height=3;
+    int32 channel=4;
 }
 
-message ReturnData {
-    int32 distance = 1;
-    float face_yaw = 2;
-    float eye_yaw = 3;
+message UserResponse {
+    int32 distance=1;
+    float face_yaw=2;
+    float eye_yaw=3;
+
 }

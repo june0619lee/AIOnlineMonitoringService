@@ -5,6 +5,47 @@ import proto_sample_pb2, proto_sample_pb2_grpc
 import os
 import cv2 # webcam control; image processing
 import argparse
+import random
+
+class Feedback_message:
+    message_dict = {
+        'ok' : {
+            'text' : 'okay',
+            'color' : (0,255,0)
+        },
+        'close' : {
+            'text' : 'WARNING: too close',
+            'color' : (0,0,255)
+        },
+        'none' : {
+            'text' : 'Server not found',
+            'color' : (0,0,255)
+        }
+    }
+
+def distance_based_feedback(distance, frame, thres_value=95):
+    '''
+        args:
+            distance (int): face to monitor distance
+            frame (np.ndarray): user's front webcam image
+        return:
+            frame (np.ndarray): annotated frame
+    '''
+
+
+    if distance == -1:
+        key = 'none'
+    elif distance < thres_value: # too close
+        key = 'close'
+        os.system('say too close') # tts
+    else:
+        key = 'ok'
+
+    message_dict = Feedback_message.message_dict
+        
+    frame = cv2.putText(frame, message_dict[key]['text'], (100,100), cv2.FONT_HERSHEY_SIMPLEX, 1.0, message_dict[key]['color'], 2)
+
+    return frame
 
 def pass_to_server(ip, port, frame):
     if ip[-1] != ':':
@@ -49,14 +90,19 @@ def main():
         # print(type(frame)) # np.ndarray
         # print(frame.shape)
 
-        result = pass_to_server(args.ip, args.port, frame)
+        # result = pass_to_server(args.ip, args.port, frame)
 
-        print('distance : ', result.distance)
-        print('face yaw:', result.face_yaw)
-        print('eye yaw:', result.eye_yaw)
+        distance = random.randint(94, 97)
+        # frame = distance_based_feedback(result.distance, frame)
+        frame = distance_based_feedback(distance, frame)
+
+
+        # print('distance : ', result.distance)
+        # print('face yaw:', result.face_yaw)
+        # print('eye yaw:', result.eye_yaw)
 
         cv2.imshow('window', frame)
-        key = cv2.waitKey(33) # 33 milliseconds / frame
+        key = cv2.waitKey(330) # 33 milliseconds / frame
                               # => frame per second (fps)
                               # 30 frames = around 1 second processing
 
