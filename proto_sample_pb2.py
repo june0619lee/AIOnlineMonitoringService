@@ -13,35 +13,35 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12proto_sample.proto\"M\n\x08UserData\x12\x11\n\timg_bytes\x18\x01 \x01(\x0c\x12\r\n\x05width\x18\x02 \x01(\x05\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\x0f\n\x07\x63hannel\x18\x04 \x01(\x05\"A\n\nReturnData\x12\x10\n\x08\x64istance\x18\x01 \x01(\x05\x12\x10\n\x08\x66\x61\x63\x65_yaw\x18\x02 \x01(\x02\x12\x0f\n\x07\x65ye_yaw\x18\x03 \x01(\x02\x32=\n\x16VirtualLearningMonitor\x12#\n\x07process\x12\t.UserData\x1a\x0b.ReturnData\"\x00\x62\x06proto3')
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12proto_sample.proto\"P\n\x0bUserRequest\x12\x11\n\timg_bytes\x18\x01 \x01(\x0c\x12\r\n\x05width\x18\x02 \x01(\x05\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\x0f\n\x07\x63hannel\x18\x04 \x01(\x05\"C\n\x0cUserResponse\x12\x10\n\x08\x64istance\x18\x01 \x01(\x05\x12\x10\n\x08\x66\x61\x63\x65_yaw\x18\x02 \x01(\x02\x12\x0f\n\x07\x65ye_yaw\x18\x03 \x01(\x02\x32\x46\n\x1a\x41I_OnlineMonitoringService\x12(\n\x07process\x12\x0c.UserRequest\x1a\r.UserResponse\"\x00\x62\x06proto3')
 
 
 
-_USERDATA = DESCRIPTOR.message_types_by_name['UserData']
-_RETURNDATA = DESCRIPTOR.message_types_by_name['ReturnData']
-UserData = _reflection.GeneratedProtocolMessageType('UserData', (_message.Message,), {
-  'DESCRIPTOR' : _USERDATA,
+_USERREQUEST = DESCRIPTOR.message_types_by_name['UserRequest']
+_USERRESPONSE = DESCRIPTOR.message_types_by_name['UserResponse']
+UserRequest = _reflection.GeneratedProtocolMessageType('UserRequest', (_message.Message,), {
+  'DESCRIPTOR' : _USERREQUEST,
   '__module__' : 'proto_sample_pb2'
-  # @@protoc_insertion_point(class_scope:UserData)
+  # @@protoc_insertion_point(class_scope:UserRequest)
   })
-_sym_db.RegisterMessage(UserData)
+_sym_db.RegisterMessage(UserRequest)
 
-ReturnData = _reflection.GeneratedProtocolMessageType('ReturnData', (_message.Message,), {
-  'DESCRIPTOR' : _RETURNDATA,
+UserResponse = _reflection.GeneratedProtocolMessageType('UserResponse', (_message.Message,), {
+  'DESCRIPTOR' : _USERRESPONSE,
   '__module__' : 'proto_sample_pb2'
-  # @@protoc_insertion_point(class_scope:ReturnData)
+  # @@protoc_insertion_point(class_scope:UserResponse)
   })
-_sym_db.RegisterMessage(ReturnData)
+_sym_db.RegisterMessage(UserResponse)
 
-_VIRTUALLEARNINGMONITOR = DESCRIPTOR.services_by_name['VirtualLearningMonitor']
+_AI_ONLINEMONITORINGSERVICE = DESCRIPTOR.services_by_name['AI_OnlineMonitoringService']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _USERDATA._serialized_start=22
-  _USERDATA._serialized_end=99
-  _RETURNDATA._serialized_start=101
-  _RETURNDATA._serialized_end=166
-  _VIRTUALLEARNINGMONITOR._serialized_start=168
-  _VIRTUALLEARNINGMONITOR._serialized_end=229
-
+  _USERREQUEST._serialized_start=22
+  _USERREQUEST._serialized_end=102
+  _USERRESPONSE._serialized_start=104
+  _USERRESPONSE._serialized_end=171
+  _AI_ONLINEMONITORINGSERVICE._serialized_start=173
+  _AI_ONLINEMONITORINGSERVICE._serialized_end=243
 # @@protoc_insertion_point(module_scope)

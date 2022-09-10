@@ -12,7 +12,7 @@ from pytz import timezone
 
 from ai_module import GazeTracker
 
-class StudyMonitoringModel(proto_sample_pb2_grpc.VirtualLearningMonitorServicer):
+class StudyMonitoringModel(proto_sample_pb2_grpc.AI_OnlineMonitoringServiceServicer):
     def __init__(self, args):
         super().__init__()
 
@@ -34,25 +34,15 @@ class StudyMonitoringModel(proto_sample_pb2_grpc.VirtualLearningMonitorServicer)
             datetime.now(timezone('Asia/Seoul')).strftime(self.fmt)
         ))
 
-        # self.monitor_image = GazeTracker()
-
-        # TODO: implement
+        self.monitor_image = GazeTracker()
 
     def process(self, input, context):
-        # 1D np.ndarray
+
         image = np.array(list(input.img_bytes))
         image = image.reshape((input.height, input.width, input.channel))
         image = np.array(image, dtype=np.uint8)
 
         return_data = proto_sample_pb2.ReturnData()
-
-        return_data.distance = -1.0
-        return_data.face_yaw = -1.0
-        return_data.eye_yaw = -1.0
-
-        print("returning")
-
-        return return_data
 
         try:
             result = self.monitor_image(image)
@@ -60,7 +50,7 @@ class StudyMonitoringModel(proto_sample_pb2_grpc.VirtualLearningMonitorServicer)
             self.logger.info('{} error occurred {}'.format(
                 datetime.now(timezone('Asia/Seoul')).strftime(self.fmt), e
             ))
-            return_data.distance = -1.0
+            return_data.distance = -1
             return_data.face_yaw = -1.0
             return_data.eye_yaw = -1.0
         except KeyboardInterrupt:
@@ -89,7 +79,7 @@ def main():
     args = opt()
 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=args.num_worker))
-    proto_sample_pb2_grpc.add_VirtualLearningMonitorServicer_to_server(StudyMonitoringModel(args), server)
+    proto_sample_pb2_grpc.add_AI_OnlineMonitoringServiceServicer_to_server(StudyMonitoringModel(args), server)
 
     # port setting
     server.add_insecure_port('[::]:{}'.format(args.port))
