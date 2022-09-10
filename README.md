@@ -20,7 +20,7 @@ conda env create -f AIMonitoringServiceEnvZIP.yaml
 conda create -n <ENV_NAME> python=3.8
 ```
 
-Dependencies can be found in the file **requirements.txt** in this repo.
+Dependencies can be found in the file [requirements.txt](https://github.com/june0619lee/newProject/blob/main/requirements.txt) in this repo.
 
 ### 1.2. gRPC build
 
