@@ -1,8 +1,5 @@
 # AI Online Monitoring Service
 
-![my_figure](test.png)
-
-Inspired by....
 This project tracks the face of a user using the webcam to warn them if their eyes wander or if they are too close to the screen. 
 
 ## 1. Installation
